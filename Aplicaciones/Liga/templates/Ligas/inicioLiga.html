@@ -1,0 +1,81 @@
+<script>
+    function confirmDelete(id) {
+        Swal.fire({
+            title: "CONFIRMACIÓN",
+            text: "¿Está seguro de eliminar esta liga?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Sí, eliminar",
+            cancelButtonText: "Cancelar"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "eliminarLiga/" + id;
+            }
+        });
+    }
+</script>
+
+<br>
+<h1 class="text-center">Listado de Ligas</h1>
+<hr>
+
+<div class="row">
+    <div class="text-end">
+        <a href="nuevaLiga" class="btn btn-outline-success text-right">
+            Agregar Liga <i class="fa fa-plus-circle"></i>
+        </a>
+    </div>
+</div>
+<br>
+
+<table class="table table-bordered table-striped table-hover">
+    <thead>
+        <tr class="bg-info">
+            <th>ID</th>
+            <th>LOGO</th>
+            <th>NOMBRE</th>
+            <th>PAÍS</th>
+            <th>TEMPORADA ACTUAL</th>
+            <th>REGLAMENTO</th>
+            <th>ACCIONES</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for liga in ligas %}
+            <tr>
+                <td>{{ liga.id }}</td>
+                <td>
+                    {% if liga.logo %}
+                        <img src="{{ liga.logo.url }}" height="80px" width="80px" alt="Logo de la liga">
+                    {% else %}
+                        No tiene logo
+                    {% endif %}
+                </td>
+                <td>{{ liga.nombre }}</td>
+                <td>{{ liga.país }}</td>
+                <td>{{ liga.temporada_actual }}</td>
+                <td>
+                    {% if liga.reglamento %}
+                        <div style="height: 100%; width: 100%;">
+                            <iframe src="{{ liga.reglamento.url }}" frameborder="0"></iframe>
+                        </div>
+                        <a href="{{ liga.reglamento.url }}" download class="btn btn-sm btn-success mb-2">Descargar PDF</a>
+                        <a href="{{ liga.reglamento.url }}" class="btn btn-sm btn-primary mb-2" target="_blank">Ver PDF</a>
+                    {% else %}
+                        No tiene reglamento
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{% url 'editarLiga' liga.id %}" class="btn btn-outline-warning">
+                        <i class="fa fa-pen"></i>
+                    </a>
+                    <a href="#" onclick="confirmDelete('{{ liga.id }}')" class="btn btn-outline-danger">
+                        <i class="fa fa-trash"></i>
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
