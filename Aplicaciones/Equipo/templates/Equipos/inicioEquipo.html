@@ -1,0 +1,107 @@
+{% extends "plantilla.html" %}
+{% load static %}
+{% block contenido %}
+
+<script>
+    function confirmDelete(id) {
+        Swal.fire({
+            title: "CONFIRMACIÓN",
+            text: "¿Está seguro de eliminar este equipo?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Sí, eliminar",
+            cancelButtonText: "Cancelar"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "eliminarEquipo/" + id;
+            }
+        });
+    }
+</script>
+
+<br>
+<h1 class="text-center">Listado de Equipos</h1>
+<hr>
+
+<div class="row">
+    <div class="text-end">
+        <a href="nuevoEquipo" class="btn btn-outline-success text-right">
+            Agregar Equipo <i class="fa fa-plus"></i>
+        </a>
+    </div>
+</div>
+<br>
+
+<table class="table table-bordered table-striped table-hover" id="tbl_equipos">
+    <thead>
+        <tr class="bg-info">
+            <th>ID</th>
+            <th>NOMBRE</th>            
+            <th>LIGA</th>
+            <th>CIUDAD</th>
+            <th>ESCUDO</th>
+            <th>FICHA TÉCNICA</th>
+            <th>ACCIONES</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for equipo in equipos %}
+            <tr>
+                <td>{{ equipo.id }}</td>
+                <td>{{ equipo.nombre }}</td>    
+                <td>{{ equipo.liga.nombre }}</td>  <!-- Liga asociada -->
+                <td>{{ equipo.ciudad }}</td>
+                <td>
+                    {% if equipo.escudo %}
+                        <img src="{{ equipo.escudo.url }}" width="80px" height="80px" alt="Escudo">
+                    {% else %}
+                        Ninguna Imagen
+                    {% endif %}
+                </td>
+                <td>
+                    {% if equipo.ficha_tecnica %}
+                        <div style="height: 100%; width: 100%;">
+                            <iframe src="{{ equipo.ficha_tecnica.url }}" frameborder="0"></iframe>
+                        </div>
+                        <a href="{{ equipo.ficha_tecnica.url }}" download class="btn btn-sm btn-success mb-2">Descargar PDF</a>
+                        <a href="{{ equipo.ficha_tecnica.url }}" class="btn btn-sm btn-success mb-2" target="_blank">Ver PDF</a>
+                    {% else %}
+                        No tiene ficha técnica
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="editarEquipo/{{ equipo.id }}" class="btn btn-outline-warning">
+                        <i class="fa fa-pen"></i>
+                    </a>
+                    <a href="#" onclick="confirmDelete('{{ equipo.id }}')" class="btn btn-outline-danger">
+                        <i class="fa fa-trash"></i>
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+
+    <script>
+        let table = new DataTable('#tbl_equipos');
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('#tbl_equipos').DataTable({
+                dom: 'Bfrtip',
+                buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
+                pageLength: 10,
+                language: {
+                    url: "https://cdn.datatables.net/plug-ins/1.13.7/i18n/Spanish.json"
+                }
+            });
+        });
+    </script>
+
+    </script>
+    </tbody>
+</table>
+
+<br><br><br><br><br><br>
+{% endblock %}
