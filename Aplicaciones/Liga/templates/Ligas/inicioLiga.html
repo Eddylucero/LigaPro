@@ -1,3 +1,7 @@
+{% extends "plantilla.html" %}
+{% load static %}
+{% block contenido %}
+
 <script>
     function confirmDelete(id) {
         Swal.fire({
@@ -23,21 +27,21 @@
 
 <div class="row">
     <div class="text-end">
-        <a href="nuevaLiga" class="btn btn-outline-success text-right">
-            Agregar Liga <i class="fa fa-plus-circle"></i>
+        <a href="/" class="btn btn-outline-success text-right">
+            Agregar Liga <i class="fa fa-plus"></i>
         </a>
     </div>
 </div>
 <br>
 
-<table class="table table-bordered table-striped table-hover">
+<table class="table table-bordered table-striped table-hover" id="tbl_ligas">
     <thead>
         <tr class="bg-info">
             <th>ID</th>
-            <th>LOGO</th>
-            <th>NOMBRE</th>
+            <th>NOMBRE</th>            
             <th>PAÍS</th>
             <th>TEMPORADA ACTUAL</th>
+            <th>LOGO</th>
             <th>REGLAMENTO</th>
             <th>ACCIONES</th>
         </tr>
@@ -46,29 +50,29 @@
         {% for liga in ligas %}
             <tr>
                 <td>{{ liga.id }}</td>
-                <td>
-                    {% if liga.logo %}
-                        <img src="{{ liga.logo.url }}" height="80px" width="80px" alt="Logo de la liga">
-                    {% else %}
-                        No tiene logo
-                    {% endif %}
-                </td>
-                <td>{{ liga.nombre }}</td>
+                <td>{{ liga.nombre }}</td>    
                 <td>{{ liga.país }}</td>
                 <td>{{ liga.temporada_actual }}</td>
+                <td>
+                    {% if liga.logo %}
+                        <img src="{{ liga.logo.url }}" width="80px" height="80px" alt="Logo">
+                    {% else %}
+                        Ninguna Imagen
+                    {% endif %}
+                </td>
                 <td>
                     {% if liga.reglamento %}
                         <div style="height: 100%; width: 100%;">
                             <iframe src="{{ liga.reglamento.url }}" frameborder="0"></iframe>
                         </div>
                         <a href="{{ liga.reglamento.url }}" download class="btn btn-sm btn-success mb-2">Descargar PDF</a>
-                        <a href="{{ liga.reglamento.url }}" class="btn btn-sm btn-primary mb-2" target="_blank">Ver PDF</a>
+                        <a href="{{ liga.reglamento.url }}" class="btn btn-sm btn-success mb-2" target="_blank">Ver PDF</a>
                     {% else %}
                         No tiene reglamento
                     {% endif %}
                 </td>
                 <td>
-                    <a href="{% url 'editarLiga' liga.id %}" class="btn btn-outline-warning">
+                    <a href="editarLiga/{{ liga.id }}" class="btn btn-outline-warning">
                         <i class="fa fa-pen"></i>
                     </a>
                     <a href="#" onclick="confirmDelete('{{ liga.id }}')" class="btn btn-outline-danger">
@@ -77,5 +81,27 @@
                 </td>
             </tr>
         {% endfor %}
+
+    <script>
+        let table = new DataTable('#tbl_ligas');
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('#tbl_ligas').DataTable({
+                dom: 'Bfrtip',
+                buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
+                pageLength: 10,
+                language: {
+                    url: "https://cdn.datatables.net/plug-ins/1.13.7/i18n/Spanish.json"
+                }
+            });
+        });
+    </script>
+
+    </script>
     </tbody>
 </table>
+
+<br><br><br><br><br><br>
+{% endblock %}

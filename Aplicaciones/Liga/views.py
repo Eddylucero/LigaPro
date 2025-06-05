@@ -7,11 +7,11 @@ import os
 # Renderizar listado de ligas
 def listarLigas(request):
     ligas = Liga.objects.all()  # Obtener todas las ligas
-    return render(request, "Liga/inicioLiga.html", {'ligas': ligas})
+    return render(request, "Ligas/inicioLiga.html", {'ligas': ligas})
 
 # Renderizar formulario para agregar una nueva liga
 def nuevaLiga(request):
-    return render(request, "Liga/nuevaLiga.html")
+    return render(request, "Ligas/nuevaLiga.html")
 
 # Almacenar datos de la liga en la BD
 def guardarLiga(request):
@@ -55,7 +55,7 @@ def eliminarLiga(request, id):
 # Renderizar formulario de edición de liga
 def editarLiga(request, id):
     liga = Liga.objects.get(id=id)
-    return render(request, "Liga/editarLiga.html", {'liga': liga})
+    return render(request, "Ligas/editarLiga.html", {'liga': liga})
 
 # Procesar la edición y actualizar en la BD
 def procesarEdicionLiga(request, id):

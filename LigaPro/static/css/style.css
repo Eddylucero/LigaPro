@@ -1,0 +1,34 @@
+/* ✅ Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+/* ✅ Encabezado dinámico */
+header {
+    background-color: #ffffff;
+    padding: 15px;
+    text-align: center;
+    border-bottom: 3px solid #ddd;
+    transition: background-color 0.3s ease-in-out;
+}
+
+/* ✅ Cambia el color cuando estás dentro de otra página */
+header.active {
+    background-color: #87CEEB;
+}
+
+/* ✅ Estilos del carrusel */
+.carousel-item img {
+    max-height: 500px;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: rgba(0, 0, 0, 0.5);
+}
