@@ -1,0 +1,101 @@
+{% extends "plantilla.html" %}
+{% load static %}
+{% block contenido %}
+  <div class="row mt-4">
+      <div class="col-md-3"></div>
+      <div class="col-md-6 bg-light p-4 rounded shadow">
+          <h1 class="text-center mb-4">Nueva Liga</h1>
+
+          <form action="{% url 'guardarLiga' %}" id="formGuardarLiga" enctype="multipart/form-data" method="post">
+              {% csrf_token %}
+
+              <div class="mb-3">
+                  <label for="nombre" class="form-label">Nombre de la Liga</label>
+                  <input type="text" class="form-control" name="nombre" id="nombre" required>
+              </div>
+
+              <div class="mb-3">
+                  <label for="pais" class="form-label">País</label>
+                  <input type="text" class="form-control" name="pais" id="pais" required>
+              </div>
+
+              <div class="mb-3">
+                  <label for="temporada_actual" class="form-label">Temporada Actual</label>
+                  <input type="text" class="form-control" name="temporada_actual" id="temporada_actual" required>
+              </div>
+
+              <div class="mb-3">
+                  <label for="logo" class="form-label">Logo de la Liga</label>
+                  <input type="file" class="form-control" name="logo" id="logo" accept="image/*">
+              </div>
+
+              <div class="mb-3">
+                  <label for="reglamento" class="form-label">Reglamento en PDF</label>
+                  <input type="file" class="form-control" name="reglamento" id="reglamento" accept="application/pdf">
+              </div>
+
+              <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                  <a href="{% url 'listarLigas' %}" class="btn btn-outline-danger me-md-2">Cancelar <i class="fa fa-times"></i></a>
+                  <button type="submit" class="btn btn-outline-success">Guardar Liga <i class="fa-solid fa-floppy-disk"></i></button>
+              </div>
+          </form>
+      </div>
+      <div class="col-md-3"></div>
+  </div>
+
+<script>
+    $("#formGuardarLiga").validate({
+        rules:{
+            "nombre":{
+                required:true,
+                minlength:3,
+                maxlength:100
+            },
+            "pais":{
+                required:true,
+                minlength:3,
+                maxlength:50
+            },
+            "temporada_actual":{
+                required:true,
+                minlength:4,
+                maxlength:20
+            },
+            "logo":{
+                required:true,
+                extension:"jpg|jpeg|png|gif"
+            },
+            "reglamento":{
+                required:true,
+                extension:"pdf"
+            }
+        },
+        messages:{
+            "nombre":{
+                required:"El nombre de la liga es requerido.",
+                minlength:"Debe tener al menos 3 caracteres.",
+                maxlength:"No puede superar los 100 caracteres."
+            },
+            "pais":{
+                required:"El país es requerido.",
+                minlength:"Debe tener al menos 3 caracteres.",
+                maxlength:"No puede superar los 50 caracteres."
+            },
+            "temporada_actual":{
+                required:"La temporada es requerida.",
+                minlength:"Debe tener al menos 4 caracteres.",
+                maxlength:"No puede superar los 20 caracteres."
+            },
+            "logo":{
+                required:"Debe subir un logo de la liga.",
+                extension:"Solo se permiten imágenes: jpg, jpeg, png, gif."
+            },
+            "reglamento":{
+                required:"Debe subir el reglamento en formato PDF.",
+                extension:"Solo se permite formato PDF."
+            }
+        }
+    });
+</script>
+
+{% endblock %}
