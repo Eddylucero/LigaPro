@@ -4,7 +4,7 @@
 <div class="row mt-4">
     <div class="col-md-3"></div>
     <div class="col-md-6 bg-light p-4 rounded shadow">
-        <h1 class="text-center mb-4">Editar Liga</h1>
+        <h1 class="text-center mb-4" style="color: black;">Editar Liga</h1>
 
         <form action="{% url 'procesarEdicionLiga' liga.id %}" id="formEditarLiga" enctype="multipart/form-data" method="post">
             {% csrf_token %}

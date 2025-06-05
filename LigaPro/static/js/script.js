@@ -1,32 +1,36 @@
 document.addEventListener("DOMContentLoaded", function () {
     const header = document.querySelector("header");
-    const currentPath = window.location.pathname.toLowerCase().trim();
+    const currentPath = window.location.pathname.toLowerCase().replace(/\/+$/, ''); // quitar slashes al final
     const navLinks = document.querySelectorAll(".nav-link");
 
     // Cambia el estilo del encabezado si no estás en la página principal
-    if (currentPath !== "/") {
+    if (currentPath !== "") { // la raíz es cadena vacía tras quitar slash
         header.classList.add("active");
+    } else {
+        header.classList.remove("active");
     }
 
-    // Activa el carrusel con una velocidad de transición
-    new bootstrap.Carousel(document.querySelector("#carouselExampleIndicators"), {
-        interval: 3000,
-        wrap: true
-    });
+    // Inicializar carrusel solo si existe el elemento
+    const carouselElement = document.querySelector("#carouselExampleIndicators");
+    if (carouselElement) {
+        new bootstrap.Carousel(carouselElement, {
+            interval: 3000,
+            wrap: true
+        });
+    }
 
-    // Elimina la clase "active" de todos los enlaces antes de volver a aplicarla
+    // Quitar clase active de todos
     navLinks.forEach(link => link.classList.remove("active"));
 
     // Marcar el enlace activo basado en la ruta actual
     navLinks.forEach(link => {
-        const href = link.getAttribute("href").toLowerCase().trim();
+        let href = link.getAttribute("href").toLowerCase().replace(/\/+$/, '');
 
-        // Si la ruta es la raíz y el enlace es "Inicio"
-        if (currentPath === "/" && href === "/") {
+        // Caso raíz / o ''
+        if ((currentPath === "" && href === "") || (currentPath === "/" && href === "")) {
             link.classList.add("active");
         }
-        // Para los demás enlaces: solo marcar si la ruta actual inicia con el href (y no es la raíz)
-        else if (href !== "/" && currentPath.startsWith(href)) {
+        else if (href !== "" && currentPath.startsWith(href)) {
             link.classList.add("active");
         }
     });
