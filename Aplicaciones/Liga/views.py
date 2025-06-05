@@ -17,14 +17,14 @@ def nuevaLiga(request):
 def guardarLiga(request):
     if request.method == "POST":
         nombre = request.POST["nombre"]
-        país = request.POST["pais"]
+        pais = request.POST["pais"]
         temporada_actual = request.POST["temporada_actual"]
 
         logo = request.FILES.get("logo")
         reglamento = request.FILES.get("reglamento")
 
         Liga.objects.create(
-            nombre=nombre, país=país, temporada_actual=temporada_actual,
+            nombre=nombre, pais=pais, temporada_actual=temporada_actual,
             logo=logo, reglamento=reglamento
         )
 
@@ -60,12 +60,12 @@ def editarLiga(request, id):
 # Procesar la edición y actualizar en la BD
 def procesarEdicionLiga(request, id):
     nombre = request.POST["nombre"]
-    país = request.POST["pais"]
+    pais = request.POST["pais"]
     temporada_actual = request.POST["temporada_actual"]
 
     liga = Liga.objects.get(id=id)
     liga.nombre = nombre
-    liga.país = país
+    liga.pais = pais
     liga.temporada_actual = temporada_actual
 
     # Procesando nuevo logo si se sube

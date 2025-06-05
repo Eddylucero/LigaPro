@@ -11,17 +11,17 @@
 
               <div class="mb-3">
                   <label for="nombre" class="form-label">Nombre de la Liga</label>
-                  <input type="text" class="form-control" name="nombre" id="nombre" required>
+                  <input type="text" class="form-control" name="nombre" id="nombre">
               </div>
 
               <div class="mb-3">
                   <label for="pais" class="form-label">País</label>
-                  <input type="text" class="form-control" name="pais" id="pais" required>
+                  <input type="text" class="form-control" name="pais" id="pais">
               </div>
 
               <div class="mb-3">
                   <label for="temporada_actual" class="form-label">Temporada Actual</label>
-                  <input type="text" class="form-control" name="temporada_actual" id="temporada_actual" required>
+                  <input type="text" class="form-control" name="temporada_actual" id="temporada_actual">
               </div>
 
               <div class="mb-3">
@@ -95,6 +95,25 @@
                 extension:"Solo se permite formato PDF."
             }
         }
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+        $("#logo").fileinput({
+            language: "es",
+            allowedFileExtensions: ["jpg", "jpeg", "png"],
+            showUpload: false, 
+            dropZoneEnabled: true, 
+            maxFileSize: 2000, 
+            showPreview: true, 
+            browseLabel: "Seleccionar imagen",
+            removeLabel: "Eliminar",
+            initialCaption: "Arrastra y suelta la imagen aquí",
+            showRemove: true, 
+            showZoom: true, 
+            showDrag: true 
+        });
     });
 </script>
 

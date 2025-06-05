@@ -11,17 +11,17 @@
 
             <div class="mb-3">
                 <label for="nombre" class="form-label">Nombre de la Liga:</label>
-                <input type="text" class="form-control" name="nombre" id="nombre" value="{{ liga.nombre }}" required>
+                <input type="text" class="form-control" name="nombre" id="nombre" value="{{ liga.nombre }}" >
             </div>
 
             <div class="mb-3">
                 <label for="pais" class="form-label">País:</label>
-                <input type="text" class="form-control" name="pais" id="pais" value="{{ liga.país }}" required>
+                <input type="text" class="form-control" name="pais" id="pais" value="{{ liga.pais }}">
             </div>
 
             <div class="mb-3">
                 <label for="temporada_actual" class="form-label">Temporada Actual:</label>
-                <input type="text" class="form-control" name="temporada_actual" id="temporada_actual" value="{{ liga.temporada_actual }}" required>
+                <input type="text" class="form-control" name="temporada_actual" id="temporada_actual" value="{{ liga.temporada_actual }}">
             </div>
 
             <div class="mb-3">
@@ -72,12 +72,6 @@
                 required:true,
                 minlength:4,
                 maxlength:20
-            },
-            "logo":{
-                extension:"jpg|jpeg|png|gif"
-            },
-            "reglamento":{
-                extension:"pdf"
             }
         },
         messages:{
@@ -95,14 +89,26 @@
                 required:"La temporada es requerida.",
                 minlength:"Debe tener al menos 4 caracteres.",
                 maxlength:"No puede superar los 20 caracteres."
-            },
-            "logo":{
-                extension:"Solo se permiten imágenes: jpg, jpeg, png, gif."
-            },
-            "reglamento":{
-                extension:"Solo se permite formato PDF."
             }
         }
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        $("#logo").fileinput({
+            language: "es",
+            allowedFileExtensions: ["jpg", "jpeg", "png"],
+            showUpload: false, 
+            dropZoneEnabled: true, 
+            maxFileSize: 2000, 
+            showPreview: true, 
+            browseLabel: "Seleccionar imagen",
+            removeLabel: "Eliminar",
+            initialCaption: "Arrastra y suelta la imagen aquí",
+            showRemove: true, 
+            showZoom: true, 
+            showDrag: true 
+        });
     });
 </script>
 {% endblock %}

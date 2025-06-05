@@ -81,26 +81,20 @@
                 </td>
             </tr>
         {% endfor %}
-
-    <script>
-        let table = new DataTable('#tbl_equipos');
-    </script>
-
-    <script>
-        $(document).ready(function () {
-            $('#tbl_equipos').DataTable({
-                dom: 'Bfrtip',
-                buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
-                pageLength: 10,
-                language: {
-                    url: "https://cdn.datatables.net/plug-ins/1.13.7/i18n/Spanish.json"
-                }
-            });
-        });
-    </script>
-
-    </script>
     </tbody>
+<script>
+    $(document).ready(function() {
+        $('#tbl_equipos').DataTable({
+            language: {
+                url: 'https://cdn.datatables.net/plug-ins/1.13.7/i18n/Spanish.json'
+            },
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+        });
+    });
+</script>
 </table>
 
 <br><br><br><br><br><br>

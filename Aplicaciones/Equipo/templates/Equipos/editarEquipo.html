@@ -76,14 +76,7 @@
                 required:true,
                 minlength:3,
                 maxlength:50
-            },
-            "escudo":{
-                extension:"jpg|jpeg|png|gif"
-            },
-            "ficha_tecnica":{
-                extension:"pdf"
-            }
-        },
+            }},
         messages:{
             "nombre":{
                 required:"El nombre del equipo es requerido.",
@@ -97,14 +90,26 @@
                 required:"La ciudad es requerida.",
                 minlength:"Debe tener al menos 3 caracteres.",
                 maxlength:"No puede superar los 50 caracteres."
-            },
-            "escudo":{
-                extension:"Solo se permiten imágenes: jpg, jpeg, png, gif."
-            },
-            "ficha_tecnica":{
-                extension:"Solo se permite formato PDF."
-            }
-        }
+            }},
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+        $("#escudo").fileinput({
+            language: "es",
+            allowedFileExtensions: ["jpg", "jpeg", "png"],
+            showUpload: false, 
+            dropZoneEnabled: true, 
+            maxFileSize: 2000, 
+            showPreview: true, 
+            browseLabel: "Seleccionar imagen",
+            removeLabel: "Eliminar",
+            initialCaption: "Arrastra y suelta la imagen aquí",
+            showRemove: true, 
+            showZoom: true, 
+            showDrag: true 
+        });
     });
 </script>
 {% endblock %}

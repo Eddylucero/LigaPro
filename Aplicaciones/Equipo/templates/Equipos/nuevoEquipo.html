@@ -11,12 +11,12 @@
 
               <div class="mb-3">
                   <label for="nombre" class="form-label">Nombre del Equipo</label>
-                  <input type="text" class="form-control" name="nombre" id="nombre" required>
+                  <input type="text" class="form-control" name="nombre" id="nombre">
               </div>
 
               <div class="mb-3">
                   <label for="liga" class="form-label">Liga</label>
-                  <select class="form-control" name="liga" id="liga" required>
+                  <select class="form-control" name="liga" id="liga">
                       <option value="">Seleccione una liga</option>
                       {% for liga in ligas %}
                           <option value="{{ liga.id }}">{{ liga.nombre }}</option>
@@ -26,7 +26,7 @@
 
               <div class="mb-3">
                   <label for="ciudad" class="form-label">Ciudad</label>
-                  <input type="text" class="form-control" name="ciudad" id="ciudad" required>
+                  <input type="text" class="form-control" name="ciudad" id="ciudad">
               </div>
 
               <div class="mb-3">
@@ -96,6 +96,25 @@
                 extension:"Solo se permite formato PDF."
             }
         }
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+        $("#escudo").fileinput({ 
+            language: "es",
+            allowedFileExtensions: ["jpg", "jpeg", "png"],
+            showUpload: false, 
+            dropZoneEnabled: true, 
+            maxFileSize: 2000, 
+            showPreview: true, 
+            browseLabel: "Seleccionar imagen",
+            removeLabel: "Eliminar",
+            initialCaption: "Arrastra y suelta la imagen aquí",
+            showRemove: true, 
+            showZoom: true, 
+            showDrag: true 
+        });
     });
 </script>
 
