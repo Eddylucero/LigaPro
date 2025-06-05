@@ -1,0 +1,110 @@
+{% extends "plantilla.html" %}
+{% load static %}
+{% block contenido %}
+<div class="row mt-4">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 bg-light p-4 rounded shadow">
+        <h1 class="text-center mb-4">Editar Equipo</h1>
+
+        <form action="{% url 'procesarEdicionEquipo' equipo.id %}" id="formEditarEquipo" enctype="multipart/form-data" method="post">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre del Equipo:</label>
+                <input type="text" class="form-control" name="nombre" id="nombre" value="{{ equipo.nombre }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="liga" class="form-label">Liga:</label>
+                <select class="form-control" name="liga" id="liga" required>
+                    {% for liga in ligas %}
+                        <option value="{{ liga.id }}" {% if equipo.liga.id == liga.id %}selected{% endif %}>
+                            {{ liga.nombre }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="ciudad" class="form-label">Ciudad:</label>
+                <input type="text" class="form-control" name="ciudad" id="ciudad" value="{{ equipo.ciudad }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="escudo">Escudo del Equipo: <small class="text-muted">Si no seleccionas una nueva imagen, se mantendrá la actual.</small></label>
+                <input class="form-control" type="file" name="escudo" id="escudo" accept="image/*">
+                {% if equipo.escudo %}
+                    <img src="{{ equipo.escudo.url }}" height="auto" width="100px" alt="Escudo del equipo">
+                {% else %}
+                    No tiene escudo
+                {% endif %}
+            </div>
+
+            <div class="mb-3">
+                <label for="ficha_tecnica">Ficha Técnica en PDF: <small class="text-muted">Si no seleccionas un nuevo documento, se mantendrá el actual.</small></label>
+                <input class="form-control" type="file" name="ficha_tecnica" id="ficha_tecnica" accept="application/pdf">
+                {% if equipo.ficha_tecnica %}
+                    <div style="height: 100%; width: 100%;">
+                        <iframe src="{{ equipo.ficha_tecnica.url }}" frameborder="0"></iframe>
+                    </div>
+                {% else %}
+                    No tiene ficha técnica
+                {% endif %}
+            </div>
+
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                <a href="{% url 'listarEquipos' %}" class="btn btn-outline-danger me-md-2">Cancelar <i class="fa fa-times"></i></a>
+                <button type="submit" class="btn btn-outline-primary">Actualizar Equipo <i class="fa-solid fa-pen-to-square"></i></button>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-3"></div>
+</div>
+
+<script>
+    $("#formEditarEquipo").validate({
+        rules:{
+            "nombre":{
+                required:true,
+                minlength:3,
+                maxlength:100
+            },
+            "liga":{
+                required:true
+            },
+            "ciudad":{
+                required:true,
+                minlength:3,
+                maxlength:50
+            },
+            "escudo":{
+                extension:"jpg|jpeg|png|gif"
+            },
+            "ficha_tecnica":{
+                extension:"pdf"
+            }
+        },
+        messages:{
+            "nombre":{
+                required:"El nombre del equipo es requerido.",
+                minlength:"Debe tener al menos 3 caracteres.",
+                maxlength:"No puede superar los 100 caracteres."
+            },
+            "liga":{
+                required:"Debe seleccionar una liga."
+            },
+            "ciudad":{
+                required:"La ciudad es requerida.",
+                minlength:"Debe tener al menos 3 caracteres.",
+                maxlength:"No puede superar los 50 caracteres."
+            },
+            "escudo":{
+                extension:"Solo se permiten imágenes: jpg, jpeg, png, gif."
+            },
+            "ficha_tecnica":{
+                extension:"Solo se permite formato PDF."
+            }
+        }
+    });
+</script>
+{% endblock %}
