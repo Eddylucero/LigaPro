@@ -19,8 +19,9 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('Aplicaciones.Liga.urls')),
-    path('Equipos/', include('Aplicaciones.Equipo.urls')),
+    path('', include('Aplicaciones.Inicio.urls')),
+    path('Liga/', include('Aplicaciones.Liga.urls')),
+    path('Equipo/', include('Aplicaciones.Equipo.urls')),
 ]
 
 from django.conf import settings

@@ -56,33 +56,45 @@
         </div>
     </header>
 
-    <!-- ✅ Carrusel de imágenes -->
-    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-indicators">
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"></button>
-        </div>
-
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="{% static 'img/hero_bg_2.jpg' %}" class="d-block w-100" alt="Imagen 1">
-            </div>
-            <div class="carousel-item">
-                <img src="{% static 'img/hero_bg_3.jpg' %}" class="d-block w-100" alt="Imagen 2">
-            </div>
-            <div class="carousel-item">
-                <img src="{% static 'img/hero_bg_4.jpg' %}" class="d-block w-100" alt="Imagen 3">
-            </div>
-        </div>
-
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon"></span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-            <span class="carousel-control-next-icon"></span>
-        </button>
+<!-- ✅ Carrusel de imágenes con información sobre la liga -->
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"></button>
     </div>
+
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="{% static 'img/hero_bg_2.jpg' %}" class="d-block w-100" alt="Fútbol">
+            <div class="carousel-caption d-none d-md-block">
+                <h3>¡La emoción del fútbol en su máxima expresión!</h3>
+                <p>Sigue los mejores equipos y sus hazañas.</p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="{% static 'img/hero_bg_3.jpg' %}" class="d-block w-100" alt="Partidos en vivo">
+            <div class="carousel-caption d-none d-md-block">
+                <h3>Partidos en vivo</h3>
+                <p>Disfruta de la intensidad de cada encuentro.</p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="{% static 'img/hero_bg_4.jpg' %}" class="d-block w-100" alt="Jugadores estrella">
+            <div class="carousel-caption d-none d-md-block">
+                <h3>Los jugadores que hacen historia</h3>
+                <p>Descubre las nuevas promesas del fútbol.</p>
+            </div>
+        </div>
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </button>
+</div>
 
     {% block contenido %}
     <!-- Aquí irá el contenido de cada página específica -->
