@@ -29,6 +29,11 @@
                   <input type="text" class="form-control" name="ciudad" id="ciudad">
               </div>
 
+            <div class="mb-3">
+                  <label for="ciudad" class="form-label">Año Creación</label>
+                  <input type="number" class="form-control" name="anios_creacion" id="anios_creacion">
+              </div>
+
               <div class="mb-3">
                   <label for="escudo" class="form-label">Escudo del Equipo</label>
                   <input type="file" class="form-control" name="escudo" id="escudo" accept="image/*">
@@ -64,6 +69,12 @@
                 minlength:3,
                 maxlength:50
             },
+            "anios_creacion":{
+                required:true,
+                number:true,
+                min:1900,
+                max:2024
+            },
             "escudo":{
                 required:true,
                 extension:"jpg|jpeg|png|gif"
@@ -86,6 +97,12 @@
                 required:"La ciudad es requerida.",
                 minlength:"Debe tener al menos 3 caracteres.",
                 maxlength:"No puede superar los 50 caracteres."
+            },
+            "anios_creacion":{
+                required: "El año  de creacion de equipo es necesario",
+                number: "El año de la creacion del equipo debe ser unicamente de valores numéricos",
+                min: "El año de la creacion del equipo no puede ser menor al año 1800",
+                max: "El año de la creacion del equipo no puede ser mayor al año actual (2025)",                
             },
             "escudo":{
                 required:"Debe subir un escudo para el equipo.",

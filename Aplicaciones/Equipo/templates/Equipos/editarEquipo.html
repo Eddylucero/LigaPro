@@ -29,6 +29,11 @@
                 <label for="ciudad" class="form-label">Ciudad:</label>
                 <input type="text" class="form-control" name="ciudad" id="ciudad" value="{{ equipo.ciudad }}" required>
             </div>
+                        
+            <div class="mb-3">
+                  <label for="ciudad" class="form-label">Año Creación</label>
+                  <input type="number" class="form-control" name="anios_creacion" id="anios_creacion" value="{{ equipo.anios_creacion}}">
+              </div>
 
             <div class="mb-3">
                 <label for="escudo">Escudo del Equipo: <small class="text-muted">Si no seleccionas una nueva imagen, se mantendrá la actual.</small></label>
@@ -76,7 +81,14 @@
                 required:true,
                 minlength:3,
                 maxlength:50
-            }},
+            },
+            "anios_creacion":{
+                required:true,
+                number:true,
+                min:1900,
+                max:2024
+            },
+        },
         messages:{
             "nombre":{
                 required:"El nombre del equipo es requerido.",
@@ -90,7 +102,14 @@
                 required:"La ciudad es requerida.",
                 minlength:"Debe tener al menos 3 caracteres.",
                 maxlength:"No puede superar los 50 caracteres."
-            }},
+            },
+            "anios_creacion":{
+                required: "El año  de creacion de equipo es necesario",
+                number: "El año de la creacion del equipo debe ser unicamente de valores numéricos",
+                min: "El año de la creacion del equipo no puede ser menor al año 1800",
+                max: "El año de la creacion del equipo no puede ser mayor al año actual (2025)",                
+            }
+        },
     });
 </script>
 

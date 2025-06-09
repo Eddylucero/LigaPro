@@ -21,13 +21,14 @@ def guardarEquipo(request):
         nombre = request.POST["nombre"]
         liga_id = request.POST["liga"]
         ciudad = request.POST["ciudad"]
+        anios_creacion = request.POST["anios_creacion"]
 
         escudo = request.FILES.get("escudo")
         ficha_tecnica = request.FILES.get("ficha_tecnica")
 
         liga = Liga.objects.get(id=liga_id)
         Equipo.objects.create(
-            nombre=nombre, liga=liga, ciudad=ciudad,
+            nombre=nombre, liga=liga, ciudad=ciudad,anios_creacion = anios_creacion,
             escudo=escudo, ficha_tecnica=ficha_tecnica
         )
 
@@ -64,11 +65,13 @@ def procesarEdicionEquipo(request, id):
     nombre = request.POST["nombre"]
     liga_id = request.POST["liga"]
     ciudad = request.POST["ciudad"]
+    anios_creacion = request.POST["anios_creacion"]
 
     equipo = Equipo.objects.get(id=id)
     equipo.nombre = nombre
     equipo.liga = Liga.objects.get(id=liga_id)
     equipo.ciudad = ciudad
+    equipo.anios_creacion = anios_creacion
 
     if "escudo" in request.FILES:
         nuevo_escudo = request.FILES.get("escudo")

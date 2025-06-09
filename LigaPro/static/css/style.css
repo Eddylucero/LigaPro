@@ -11,13 +11,14 @@ body::before {
     content: "";
     position: fixed;
     inset: 0;
-    background-color: rgba(0, 51, 102, 0.85); /* Azul oscuro deportivo con opacidad */
+    background-color: rgba(0, 51, 102, 0.85); 
     z-index: -1;
 }
 
 /* ✅ Encabezado */
 header {
     background-color: #ffffff;
+    
     padding: 15px;
     text-align: center;
     border-bottom: 3px solid #ddd;
@@ -126,10 +127,10 @@ label {
     color: #333;
 }
 header {
-    background-color: #507497; /* Azul más claro que #003366 */
+    background-color: #507497; 
     padding: 15px;
     text-align: center;
-    border-bottom: 3px solid #507497; /* Línea inferior ligeramente contrastante */
+    border-bottom: 3px solid #507497; 
     color: white;
 }
 

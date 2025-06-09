@@ -41,7 +41,8 @@
             <th>NOMBRE</th>            
             <th>LIGA</th>
             <th>CIUDAD</th>
-            <th>ESCUDO</th>
+            <th>AÑO CREACION</th>
+            <th>ESCUDO</th>            
             <th>FICHA TÉCNICA</th>
             <th>ACCIONES</th>
         </tr>
@@ -53,6 +54,7 @@
                 <td>{{ equipo.nombre }}</td>    
                 <td>{{ equipo.liga.nombre }}</td>  <!-- Liga asociada -->
                 <td>{{ equipo.ciudad }}</td>
+                <td>{{ equipo.anios_creacion }}</td>
                 <td>
                     {% if equipo.escudo %}
                         <img src="{{ equipo.escudo.url }}" width="80px" height="80px" alt="Escudo">
@@ -83,15 +85,20 @@
         {% endfor %}
     </tbody>
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('#tbl_equipos').DataTable({
-            language: {
-                url: 'https://cdn.datatables.net/plug-ins/1.13.7/i18n/Spanish.json'
-            },
             dom: 'Bfrtip',
             buttons: [
-                'copy', 'csv', 'excel', 'pdf', 'print'
-            ]
+                { extend: 'copy', text: 'Copiar' },  
+                { extend: 'csv', text: 'CSV' },      
+                { extend: 'excel', text: 'Excel' },  
+                { extend: 'pdf', text: 'PDF' },      
+                { extend: 'print', text: 'Imprimir' } 
+            ],
+            pageLength: 10,
+            language: {
+                url: "https://cdn.datatables.net/plug-ins/1.13.7/i18n/Spanish.json"
+            }
         });
     });
 </script>
