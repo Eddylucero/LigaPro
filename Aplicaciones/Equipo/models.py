@@ -11,6 +11,7 @@ class Equipo(models.Model):
     anios_creacion = models.CharField(max_length = 20)
     escudo = models.FileField(upload_to='equipos', null=True, blank=True)
     ficha_tecnica = models.FileField(upload_to='equipos', null=True, blank=True)
-    def __str__(self):
-        return f"{self.nombre} ({self.liga.nombre})"
+
+def __str__(self):
+    return f"{self.nombre} ({self.liga.nombre})"
 
