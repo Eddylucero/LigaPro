@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-q!y0t!6kcv2e0!wu0ellub22#0c#uabk1*r%3(w(k*a2h=$ypa
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['eddylu.pythonanywhere.com']
 
 
 # Application definition
@@ -122,7 +122,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'LigaPro/static'),
 )
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
@@ -132,3 +132,4 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'LigaPro/media')
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
+
